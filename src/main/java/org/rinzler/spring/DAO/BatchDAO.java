@@ -42,9 +42,9 @@ public class BatchDAO {
                 @Override
                 public void setValues(PreparedStatement ps, int i) throws SQLException {
                     //ps.setInt(1, list.get(i).getId());
-                    ps.setString(2, list.get(i).getName());
-                    ps.setInt(3, list.get(i).getAge());
-                    ps.setString(4, list.get(i).getEmail());
+                    ps.setString(1, list.get(i).getName());
+                    ps.setInt(2, list.get(i).getAge());
+                    ps.setString(3, list.get(i).getEmail());
                 }
 
                 @Override
