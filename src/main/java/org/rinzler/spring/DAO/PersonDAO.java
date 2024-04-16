@@ -51,7 +51,7 @@ public class PersonDAO {
 
     public List<Person> index() {
         List<Person> personList = new ArrayList<>();
-        return jdbcTemplate.query("SELECT * FROM springLessons.Person", new personMapper());
+        return jdbcTemplate.query("SELECT * FROM Person", new personMapper());
 //        try {
 //            Statement statement = connection.createStatement();
 //            String indexQ= "SELECT * FROM springLessons.Person";
@@ -105,7 +105,7 @@ public class PersonDAO {
 //    }
 
     public Person show(int id) {
-        return jdbcTemplate.query("SELECT * FROM springLessons.Person WHERE id = ?", new Object[]{id}, /*new personMapper()*/ new BeanPropertyRowMapper<>(Person.class))
+        return jdbcTemplate.query("SELECT * FROM Person WHERE id = ?", new Object[]{id}, /*new personMapper()*/ new BeanPropertyRowMapper<>(Person.class))
                 .stream().findAny().orElse(null);
 //        Person person = null;
 //
@@ -139,7 +139,7 @@ public class PersonDAO {
 //    }
 
     public void create(Person person) {
-        String sql = "INSERT INTO springLessons.Person VALUES (1, ?, ?, ?)";
+        String sql = "INSERT INTO Person(name, age, email) VALUES (?, ?, ?)";
 
         jdbcTemplate.update(sql, person.getName(), person.getAge(), person.getEmail());
 //        try {
@@ -165,7 +165,7 @@ public class PersonDAO {
     }
 
     public void edit(Person person, int id) {
-        String sql = "UPDATE springLessons.Person SET name=?, age=?, email=? WHERE id=?";
+        String sql = "UPDATE Person SET name=?, age=?, email=? WHERE id=?";
         jdbcTemplate.update(sql, person.getName(), person.getAge(), person.getEmail(), id);
 //        try {
 //            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE springLessons.Person SET name=?, age=?, email=? WHERE id=?");
@@ -184,7 +184,7 @@ public class PersonDAO {
     }
 
     public void delete(int id) {
-        String sql = "DELETE FROM springLessons.Person WHERE id = ?";
+        String sql = "DELETE FROM Person WHERE id = ?";
 
         jdbcTemplate.update(sql, id);
 //        for (int i = 0; personList.size() > i; i++){

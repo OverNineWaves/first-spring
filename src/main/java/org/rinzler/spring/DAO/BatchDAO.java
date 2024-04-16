@@ -23,10 +23,10 @@ public class BatchDAO {
     public void multi(){
         List<Person> list = createPeople();
         Long start = System.currentTimeMillis();
-        String sql = "INSERT INTO springLessons.Person VALUES (?,?,?,?)";
+        String sql = "INSERT INTO Person(name, age, email) VALUES (?,?,?)";
 
         for (Person person : list) {
-            jdbcTemplate.update(sql, person.getId(), person.getName(), person.getAge(), person.getEmail());
+            jdbcTemplate.update(sql, person.getName(), person.getAge(), person.getEmail());
         }
 
         Long after = System.currentTimeMillis();
@@ -36,12 +36,12 @@ public class BatchDAO {
     public void batch(){
         List<Person> list = createPeople();
         Long start = System.currentTimeMillis();
-        String sql = "INSERT INTO springLessons.Person VALUES (?,?,?,?)";
+        String sql = "INSERT INTO Person(name, age, email) VALUES (?,?,?)";
 
         jdbcTemplate.batchUpdate(sql, new BatchPreparedStatementSetter() {
                 @Override
                 public void setValues(PreparedStatement ps, int i) throws SQLException {
-                    ps.setInt(1, list.get(i).getId());
+                    //ps.setInt(1, list.get(i).getId());
                     ps.setString(2, list.get(i).getName());
                     ps.setInt(3, list.get(i).getAge());
                     ps.setString(4, list.get(i).getEmail());
