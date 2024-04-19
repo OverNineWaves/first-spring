@@ -145,9 +145,9 @@ public class PersonDAO {
 //    }
 
     public void create(Person person) {
-        String sql = "INSERT INTO Person(name, age, email) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO Person(name, age, email, address) VALUES (?, ?, ?, ?)";
 
-        jdbcTemplate.update(sql, person.getName(), person.getAge(), person.getEmail());
+        jdbcTemplate.update(sql, person.getName(), person.getAge(), person.getEmail(),person.getAddress());
 //        try {
 //            Statement statement = connection.createStatement();
 //            String createQ = "INSERT INTO Person VALUES(" + 1 + ",'" + person.getName() + "'," + person.getAge() + ",'" + person.getEmail() + "')";
@@ -171,8 +171,8 @@ public class PersonDAO {
     }
 
     public void edit(Person person, int id) {
-        String sql = "UPDATE Person SET name=?, age=?, email=? WHERE id=?";
-        jdbcTemplate.update(sql, person.getName(), person.getAge(), person.getEmail(), id);
+        String sql = "UPDATE Person SET name=?, age=?, email=?, address=? WHERE id=?";
+        jdbcTemplate.update(sql, person.getName(), person.getAge(), person.getEmail(), person.getAddress(), id);
 //        try {
 //            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE springLessons.Person SET name=?, age=?, email=? WHERE id=?");
 //            preparedStatement.setString(1, person.getName());

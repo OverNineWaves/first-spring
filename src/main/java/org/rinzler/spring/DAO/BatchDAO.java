@@ -23,10 +23,10 @@ public class BatchDAO {
     public void multi(){
         List<Person> list = createPeople();
         Long start = System.currentTimeMillis();
-        String sql = "INSERT INTO Person(name, age, email) VALUES (?,?,?)";
+        String sql = "INSERT INTO Person(name, age, email, address) VALUES (?,?,?,?)";
 
         for (Person person : list) {
-            jdbcTemplate.update(sql, person.getName(), person.getAge(), person.getEmail());
+            jdbcTemplate.update(sql, person.getName(), person.getAge(), person.getEmail(), person.getAddress());
         }
 
         Long after = System.currentTimeMillis();
@@ -36,7 +36,7 @@ public class BatchDAO {
     public void batch(){
         List<Person> list = createPeople();
         Long start = System.currentTimeMillis();
-        String sql = "INSERT INTO Person(name, age, email) VALUES (?,?,?)";
+        String sql = "INSERT INTO Person(name, age, email, address) VALUES (?,?,?,?)";
 
         jdbcTemplate.batchUpdate(sql, new BatchPreparedStatementSetter() {
                 @Override
@@ -45,6 +45,7 @@ public class BatchDAO {
                     ps.setString(1, list.get(i).getName());
                     ps.setInt(2, list.get(i).getAge());
                     ps.setString(3, list.get(i).getEmail());
+                    ps.setString(4,list.get(i).getAddress());
                 }
 
                 @Override
@@ -62,7 +63,7 @@ public class BatchDAO {
         List<Person> personList = new ArrayList<>();
 
         for (int i = 0; i < 1000; i++) {
-            personList.add(new Person(i,"name" + i,20+i,i + "email@email.com"));
+            personList.add(new Person(i,"name" + i,20+i,i + "email@email.com", "some address" + i));
         }
         return personList;
     }
