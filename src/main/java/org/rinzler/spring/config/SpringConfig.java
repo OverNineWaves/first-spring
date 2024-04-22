@@ -54,6 +54,9 @@ public class SpringConfig implements WebMvcConfigurer {
     public void configureViewResolvers(ViewResolverRegistry registry) {
         ThymeleafViewResolver resolver = new ThymeleafViewResolver();
         resolver.setTemplateEngine(templateEngine());
+        resolver.setCharacterEncoding("UTF-8");
+        resolver.setForceContentType(true);
+        resolver.setContentType("text/html; charset=UTF-8");
         registry.viewResolver(resolver);
     }
 
@@ -66,6 +69,16 @@ public class SpringConfig implements WebMvcConfigurer {
         dataSource.setPassword(environment.getProperty("password"));
         return dataSource;
     }
+//    @Bean
+//    public ThymeleafViewResolver viewResolver() {
+//        ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
+//        viewResolver.setTemplateEngine(templateEngine());
+//        viewResolver.setCharacterEncoding("UTF-8");
+//        viewResolver.setContentType("text/html; charset=UTF-8");
+//        viewResolver.setOrder(1);
+//        viewResolver.setViewNames(new String[]{".html", ".xhtml"});
+//        return viewResolver;
+//    }
 
     @Bean
     public JdbcTemplate jdbcTemplate(){
